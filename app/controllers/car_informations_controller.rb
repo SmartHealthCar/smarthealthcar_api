@@ -17,6 +17,8 @@ class CarInformationsController < ApplicationController
   def create
     @car_information = CarInformation.new(car_information_params)
 
+    @car_information.car = Car.find_by_vin(params[:vin])
+
     if @car_information.save
       render json: @car_information, status: :created, location: @car_information
     else
