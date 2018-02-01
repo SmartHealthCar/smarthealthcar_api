@@ -1,7 +1,7 @@
 class CreateCars < ActiveRecord::Migration[5.1]
   def change
     create_table :cars do |t|
-      t.primary_key :vin
+      t.string :vin
       t.float :odometer
 
       t.timestamps
