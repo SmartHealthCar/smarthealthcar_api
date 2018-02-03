@@ -25,6 +25,10 @@ class CarInformationsController < ApplicationController
       @car_information.car = @new_car
     end
 
+    if @car_information.average_fuel_consumption == nil
+      @car_information.average_fuel_consumption = 0
+    end
+
     if @car_information.save
       render json: @car_information, status: :created, location: @car_information
     else
