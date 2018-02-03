@@ -105,7 +105,9 @@ class CarInformationsController < ApplicationController
         })
     end
 
-    render json: @all_data
+    @final_data = {all_data: @all_data}
+
+    render json: @final_data
   end
 
   def set_car_info_data
