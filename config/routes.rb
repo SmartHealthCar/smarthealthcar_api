@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get '/get_average_rpm_data/:vin', to: 'car_informations#get_average_rpm'
   get '/get_distance_traveled_data/:vin', to: 'car_informations#get_distance_traveled'
   get '/get_time_traveled_data/:vin', to: 'car_informations#get_time_traveled'
-  get '/get_all_data/:vin', to: 'car_informations#get_all_data'
+  post '/get_all_data', to: 'car_informations#get_all_data'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
