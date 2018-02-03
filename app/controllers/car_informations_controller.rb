@@ -87,13 +87,21 @@ class CarInformationsController < ApplicationController
   def get_all_data
     @all_data = []
 
+    @time_traveled = nil
+    @start_time = Time.now.to_s
+
     @car_info_data.each do |data|
+      if data.end_time != nil and data.start_time != nil
+        time_traveled = (data.end_time - data.start_time)/1.minute
+        start_time = data.start_time
+      end
+
       @all_data.append({
         :average_fuel_consumption => data.average_fuel_consumption,
         :average_rpm => data.average_rpm,
+        :time_traveled => time_traveled,
         :distance_traveled => data.distance_traveled,
-        :time_traveled => (data.end_time - data.start_time)/1.minute,
-        :start_time => data.start_time
+        :start_time => start_time
         })
     end
 
@@ -101,7 +109,12 @@ class CarInformationsController < ApplicationController
   end
 
   def set_car_info_data
-    @car = Car.find_by_vin(params[:vin])
+    if params[:vin] == "null"
+      @id = CarInformation.last.car_id
+      @car = Car.find_by_id(@id)
+    else
+      @car = Car.find_by_vin(params[:vin])
+    end
     @car_info_data = CarInformation.where :car_id => @car.id
   end
 
